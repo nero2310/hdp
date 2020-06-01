@@ -13,7 +13,33 @@ def _get_file_name(path):
 
 # Team 1
 def clean_up(datatable_list):
-    pass
+    # usuwanie kolumn z Nan
+    df_without_missing = df.dropna(how='all', axis=0) #po kolumnach
+    df_without_missing = df.dropna(how='all', axis=1)  # po wierszach
+
+    # sprawdzanie typów danych
+    columns_object_str = {}
+    for i in df_without_missing:
+        type = df_without_missing.dtypes()
+    if type == 'object' or 'str':
+        columns_object_str[i] = type
+
+    # datetime jako index
+    index_col = 'kolumna_z_datą'
+
+    # czy indeks jest unikalny (nie jestem pewna, czy to)
+    not_unique_index = {}
+    for index in df_without_missing:
+        if index = pd.Series.is_unique(index):
+            break
+    else:
+    not_unique_index = 'NAZWA KOLUMNY'  # nie wiem, jak to zapisać
+
+
+# ile procent nie jest Nan
+count = df_without_missing.notnull().sum(axis=0)  # suma wierszy z wartosciami
+count_row = df_without_missing.shape[0]  # suma wszystkich wierszy, moze byc tez len(df.index)
+not_null = (count / count_row) * 100  # procent wierszy z wartosciami
 
 
 def load_csv(csv_files: list, params: dict):
